@@ -3,36 +3,38 @@ import SwiftUI
 struct MainView: View {
     @State private var showPicker = false;
     
-    @State private var sampleColor = Color.clear
-    
+    @State private var multiColor = MultiColor([], mode: .horizontal)
+    @State private var exampleColor = Color.clear
+
     var body: some View {
         NavigationView {
             ZStack {
                 Form {
                     Section("My Implementation") {
                         Button {
-                            showPicker.toggle()
+                            showPicker = true
                         } label: {
-                            IndicatorLine()
+                            IndicatorLine(multiColor)
                         }
                         NavigationLink("   See in full screen") {
-                            FullScreenColor()
-                        }.disabled(true)
+                            FullScreenColor(color: multiColor)
+                        }.disabled(multiColor.colors.isEmpty)
                     }
                     
                     Section("Default Implementation") {
-                        ColorPicker(selection: $sampleColor) {
+                        ColorPicker(selection: $exampleColor) {
                             Text("Default")
                         }
                         NavigationLink("See in full screen") {
-                            FullScreenColor()
-                        }.disabled(true)
+                            FullScreenColor(color: .init(exampleColor))
+                        }
                     }
                 }
                 HalfSheet(isPresented: $showPicker, height: 170) {
-                    ColorSelectionView()
+                    ColorSelectionView(selection: $multiColor, isPresented: $showPicker)
                 }
             }
+            .navigationTitle("Some Colors")
         }
     }
 }

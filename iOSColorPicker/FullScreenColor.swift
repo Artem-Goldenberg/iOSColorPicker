@@ -1,14 +1,14 @@
 import SwiftUI
 
 struct FullScreenColor: View {
+    let color: MultiColor
     var body: some View {
-        LinearGradient(colors: [.red, .green], startPoint: .bottom, endPoint: .top)
-            .edgesIgnoringSafeArea(.all)
+        color.view.edgesIgnoringSafeArea(.all)
     }
 }
 
 struct FullScreenColor_Previews: PreviewProvider {
     static var previews: some View {
-        FullScreenColor()
+        FullScreenColor(color: MultiColor([.green, .blue], mode: .horizontal))
     }
 }
