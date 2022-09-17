@@ -6,7 +6,7 @@ import SwiftUI
 struct MultiColor {
     // Градиент с одним цветом это просто этот цвет
     // Поэтому можно все хранить в LinearGradient
-    private let mode: Mode
+    var mode: Mode
     var colors: [UIColor]
     
     var view: LinearGradient {

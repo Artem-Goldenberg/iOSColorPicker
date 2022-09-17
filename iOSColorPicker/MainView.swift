@@ -5,6 +5,8 @@ struct MainView: View {
     
     @State private var multiColor = MultiColor([], mode: .horizontal)
     @State private var exampleColor = Color.clear
+    
+    @State private var mode = MultiColor.Mode.horizontal
 
     var body: some View {
         NavigationView {
@@ -15,6 +17,17 @@ struct MainView: View {
                             showPicker = true
                         } label: {
                             IndicatorLine(multiColor)
+                        }
+                        Menu {
+                            Picker("Select Mode", selection: $mode) {
+                                ForEach(MultiColor.Mode.allCases, id: \.self) {
+                                    Text($0.rawValue)
+                                }
+                            }.onChange(of: mode) { mode in
+                                multiColor.mode = mode
+                            }
+                        } label: {
+                            Text("   Select Mode")
                         }
                         NavigationLink("   See in full screen") {
                             FullScreenColor(color: multiColor)

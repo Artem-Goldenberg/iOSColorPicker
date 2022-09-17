@@ -86,7 +86,7 @@ struct ColorSelectionView: View {
             }
         } label: {
             Circle()
-                .strokeBorder(samples[index].isSelected ? .yellow : .blue, lineWidth: 4)
+                .strokeBorder(samples[index].isSelected ? .yellow : .blue, lineWidth: 3)
                 .background(Circle().fill(samples[index].color))
                 .frame(width: 50, height: 40)
         }
